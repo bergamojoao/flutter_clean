@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_clean/core/utils/theme_mode_service.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:localization/localization.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -21,23 +24,35 @@ class _HomePageState extends State<HomePage> {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
-          body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text('Home'),
-            TextButton(
-                onPressed: () => config.setThemeMode(ThemeMode.dark),
-                child: const Text('dark')),
-            TextButton(
-                onPressed: () => config.setThemeMode(ThemeMode.light),
-                child: const Text('light')),
-            TextButton(
-                onPressed: () => config.setThemeMode(ThemeMode.system),
-                child: const Text('system'))
-          ],
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text('Home'),
+              TextButton(
+                  onPressed: () => config.setThemeMode(ThemeMode.dark),
+                  child: const Text('dark')),
+              TextButton(
+                  onPressed: () => config.setThemeMode(ThemeMode.light),
+                  child: const Text('light')),
+              TextButton(
+                  onPressed: () => config.setThemeMode(ThemeMode.system),
+                  child: const Text('system')),
+              TextButton(
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (ctx) {
+                          return Dialog(
+                            child: Text('welcome-text'.i18n()),
+                          );
+                        });
+                  },
+                  child: const Text('dialog'))
+            ],
+          ),
         ),
-      )),
+      ),
     );
   }
 }
